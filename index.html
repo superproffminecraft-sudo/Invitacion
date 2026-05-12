@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación de Cumpleaños</title>
+    <style>
+        :root {
+            --primary-coffee: #8d6e63;
+            --light-coffee: #efebe9;
+            --dark-coffee: #4e342e;
+            --bg-white: #ffffff;
+            --bg-cream: #faf9f6;
+            --text-brown: #3e2723;
+            --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --accent-shadow: 0 15px 35px rgba(141, 110, 99, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-image: url('assets/img/snoopy.jpeg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: var(--text-brown);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.4);
+            min-height: 100vh;
+            padding-bottom: 50px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
+        }
+
+        .section {
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: none;
+            z-index: 1;
+        }
+
+        /* Floating Sticker Decorations (s1-s6) */
+        .sticker-decor {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.75;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.12));
+        }
+
+        .sticker-decor.sd1  { top: 2%;   left: 3%;   width: 80px;  animation: floatSticker1 6s   infinite ease-in-out; }
+        .sticker-decor.sd2  { top: 10%;  right: 4%;  width: 70px;  animation: floatSticker2 7s   infinite ease-in-out; }
+        .sticker-decor.sd3  { top: 20%;  left: 78%;  width: 75px;  animation: floatSticker1 8s   infinite ease-in-out; animation-delay: -2s; }
+        .sticker-decor.sd4  { top: 32%;  left: 2%;   width: 72px;  animation: floatSticker2 6.5s infinite ease-in-out; animation-delay: -1s; }
+        .sticker-decor.sd5  { top: 42%;  right: 3%;  width: 85px;  animation: floatSticker1 7.5s infinite ease-in-out; animation-delay: -3s; }
+        .sticker-decor.sd6  { top: 53%;  left: 4%;   width: 68px;  animation: floatSticker2 9s   infinite ease-in-out; animation-delay: -4s; }
+        .sticker-decor.sd7  { top: 63%;  right: 2%;  width: 78px;  animation: floatSticker1 6s   infinite ease-in-out; animation-delay: -5s; }
+        .sticker-decor.sd8  { top: 73%;  left: 3%;   width: 72px;  animation: floatSticker2 8s   infinite ease-in-out; animation-delay: -6s; }
+        .sticker-decor.sd9  { top: 82%;  right: 4%;  width: 65px;  animation: floatSticker1 7s   infinite ease-in-out; animation-delay: -2.5s; }
+        .sticker-decor.sd10 { top: 91%;  left: 5%;   width: 80px;  animation: floatSticker2 6.5s infinite ease-in-out; animation-delay: -1.5s; }
+        .sticker-decor.sd11 { top: 16%;  left: 2%;   width: 65px;  animation: floatSticker1 7.2s infinite ease-in-out; animation-delay: -0.8s; }
+        .sticker-decor.sd12 { top: 26%;  right: 3%;  width: 70px;  animation: floatSticker2 8.5s infinite ease-in-out; animation-delay: -3.5s; }
+        .sticker-decor.sd13 { top: 48%;  left: 77%;  width: 60px;  animation: floatSticker1 6.8s infinite ease-in-out; animation-delay: -7s; }
+        .sticker-decor.sd14 { top: 58%;  left: 1%;   width: 75px;  animation: floatSticker2 7.5s infinite ease-in-out; animation-delay: -0.5s; }
+        .sticker-decor.sd15 { top: 70%;  right: 5%;  width: 68px;  animation: floatSticker1 9s   infinite ease-in-out; animation-delay: -4.5s; }
+        .sticker-decor.sd16 { top: 96%;  right: 3%;  width: 72px;  animation: floatSticker2 7s   infinite ease-in-out; animation-delay: -2s; }
+
+        @keyframes floatSticker1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(5deg); }
+        }
+
+        @keyframes floatSticker2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(-4deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px) rotate(-15deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(-3deg) scale(1.15);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px) rotate(15deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0) rotate(4deg) scale(1.15);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .section.visible {
+            animation: fadeInUp 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .film-strip {
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .film-strip.visible {
+            opacity: 1;
+        }
+
+        /* Zigzag entrance animations */
+        .film-strip:nth-of-type(odd).visible {
+            animation: slideInRight 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .film-strip:nth-of-type(even).visible {
+            animation: slideInLeft 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .film-frame {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .film-frame:hover {
+            transform: scale(1.2) translateY(-10px);
+            z-index: 50;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            filter: saturate(1.3) contrast(1.1);
+        }
+
+        .star-icon {
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .s2 {
+            animation-delay: 0.6s;
+        }
+
+        .s3 {
+            animation-delay: 1.2s;
+        }
+
+        .script-font {
+            font-family: 'Dancing Script', cursive;
+            color: var(--primary-coffee);
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .display-font {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #000;
+            margin-bottom: 25px;
+        }
+
+        /* Section 1: Top Profile */
+        .top-section {
+            padding-top: 60px;
+        }
+
+        .polaroid-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 15px 15px 70px 15px;
+            box-shadow: 0 15px 35px rgba(141, 110, 99, 0.2);
+            transform: rotate(-3deg);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(141, 110, 99, 0.1);
+            position: relative;
+            overflow: visible;
+        }
+
+        .polaroid-tape {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            width: 100px;
+            height: 30px;
+            background: rgba(141, 110, 99, 0.3);
+            backdrop-filter: blur(2px);
+            border-left: 2px dashed rgba(255, 255, 255, 0.2);
+            border-right: 2px dashed rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+
+        .polaroid-text {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--primary-coffee);
+            transform: rotate(-2deg);
+        }
+
+        .polaroid img {
+            width: 100%;
+            max-width: 280px;
+            display: block;
+        }
+
+        .star-icon {
+            position: absolute;
+        }
+
+        .s1 {
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: var(--primary-coffee);
+        }
+
+        .s2 {
+            top: 40px;
+            right: -5px;
+            font-size: 18px;
+            color: var(--light-coffee);
+        }
+
+        .s3 {
+            top: 70px;
+            right: 20px;
+            font-size: 14px;
+            color: var(--dark-coffee);
+        }
+
+        .stars-decor {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            color: var(--primary-coffee);
+            z-index: 5;
+        }
+
+        /* Section 2: Location */
+        .location-section {
+            background-image: radial-gradient(circle at center, var(--light-coffee) 0%, transparent 70%);
+        }
+
+        .location-card {
+            margin: 20px auto;
+            width: 90%;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .location-card img {
+            width: 100%;
+            display: block;
+        }
+
+        .location-info {
+            padding: 15px;
+            font-size: 1.1rem;
+            color: #888;
+            text-align: center;
+        }
+
+        .btn-location {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: var(--text-brown);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px 0 rgba(141, 110, 99, 0.15);
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
+        }
+
+        .btn-location:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 12px 40px 0 rgba(141, 110, 99, 0.25);
+        }
+
+        /* Section 3: Music Player */
+        .spotify-player {
+            background: #191414;
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            width: 95%;
+            margin: 0 auto;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .spotify-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .album-art {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            object-fit: cover;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 2px;
+        }
+
+        .artist-name {
+            font-size: 0.8rem;
+            color: #b3b3b3;
+        }
+
+        .spotify-heart {
+            color: #1DB954;
+            width: 20px;
+            height: 20px;
+        }
+
+        .spotify-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .s-icon {
+            width: 20px;
+            height: 20px;
+            color: #b3b3b3;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .s-icon:hover {
+            color: white;
+        }
+
+        .s-play-btn {
+            width: 50px;
+            height: 50px;
+            background: white;
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .s-play-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .spotify-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .time {
+            font-size: 0.7rem;
+            color: #b3b3b3;
+        }
+
+        .s-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: #4d4d4d;
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .s-progress {
+            width: 0%;
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .s-progress::after {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: -3px;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            display: none;
+        }
+
+        .s-progress-bar:hover .s-progress {
+            background: #1DB954;
+        }
+
+        .s-progress-bar:hover .s-progress::after {
+            display: block;
+        }
+
+        /* Section 4: Calendar */
+        .calendar-section {
+            padding: 20px;
+        }
+
+        .accent-text {
+            color: var(--primary-coffee);
+        }
+
+        .calendar {
+            max-width: 300px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            padding: 30px 20px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 15px 35px rgba(141, 110, 99, 0.1);
+        }
+
+        .calendar-title {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            color: var(--dark-coffee);
+        }
+
+        .calendar-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary-coffee);
+            margin-bottom: 25px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .days-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            justify-items: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary-coffee);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        .days-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            justify-items: center;
+            gap: 12px 5px;
+        }
+
+        .days-grid span {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: var(--text-brown);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            position: relative;
+        }
+
+        .days-grid span.highlight {
+            background: var(--primary-coffee);
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(141, 110, 99, 0.4);
+            position: relative;
+            transform: scale(1.15);
+            z-index: 1;
+        }
+
+        .days-grid span.highlight::after {
+            content: '';
+            position: absolute;
+            width: 42px;
+            height: 42px;
+            border: 2px dashed var(--primary-coffee);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate 10s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* Section 5: Countdown */
+        .countdown-section {
+            padding: 40px 10px;
+        }
+
+        .countdown-circle {
+            position: relative;
+            padding: 30px 10px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 100px;
+            display: inline-block;
+            width: 95%;
+            box-shadow: 0 10px 30px rgba(141, 110, 99, 0.1);
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 60%);
+        }
+
+        .countdown-circle::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 1px solid #f0f0f0;
+            border-radius: 105px;
+        }
+
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            gap: 2px;
+            font-size: 2.5rem;
+            color: var(--primary-coffee);
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .countdown-timer span {
+            min-width: 38px;
+        }
+
+        .countdown-timer .sep {
+            font-size: 1.5rem;
+            opacity: 0.3;
+            font-weight: 300;
+        }
+
+        @media (min-width: 450px) {
+            .countdown-timer {
+                font-size: 3rem;
+            }
+        }
+
+        .countdown-labels {
+            display: flex;
+            justify-content: space-around;
+            padding: 0 20px;
+            margin-top: 5px;
+            font-size: 0.7rem;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        /* Section 6: Story */
+        .story-section {
+            overflow: hidden;
+            padding: 40px 0;
+        }
+
+        .my-story-title {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .my-story-title .thin {
+            font-size: 1.8rem;
+            color: #888;
+        }
+
+        .film-strip {
+            display: flex;
+            gap: 4px;
+            padding: 6px 8px;
+            background: linear-gradient(180deg, #2a2218 0%, #1a1510 50%, #2a2218 100%);
+            margin: 0;
+            transform: rotate(-3deg) scale(1.15);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        }
+
+        .film-strip.r2 {
+            transform: rotate(4deg) scale(1.15);
+        }
+
+        .film-strip.r3 {
+            transform: rotate(-2deg) scale(1.12);
+        }
+
+        .film-strip.r4 {
+            transform: rotate(3deg) scale(1.14);
+        }
+
+        .film-strip.r5 {
+            transform: rotate(-4deg) scale(1.13);
+        }
+
+        .film-strip.r6 {
+            transform: rotate(2.5deg) scale(1.15);
+        }
+
+        .film-strip.r7 {
+            transform: rotate(-3.5deg) scale(1.12);
+        }
+
+        .film-strip.r8 {
+            transform: rotate(3.5deg) scale(1.14);
+        }
+
+        .film-strip.reverse {
+            transform: rotate(3deg) scale(1.15);
+        }
+
+        .film-frame {
+            flex: 1 1 0;
+            min-width: 80px;
+            height: 75px;
+            background: #0a0806;
+            overflow: hidden;
+            position: relative;
+            border: 1.5px solid #0a0806;
+            border-radius: 1px;
+        }
+
+        .film-frame img,
+        .film-frame video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(0.95) contrast(1.05);
+            display: block;
+        }
+
+        .film-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-image: repeating-linear-gradient(to right,
+                    transparent 0px,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.5) 2px,
+                    rgba(255, 255, 255, 0.5) 5px,
+                    transparent 5px,
+                    transparent 9px);
+            z-index: 3;
+        }
+
+        .film-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-image: repeating-linear-gradient(to right,
+                    transparent 0px,
+                    transparent 2px,
+                    rgba(255, 255, 255, 0.5) 2px,
+                    rgba(255, 255, 255, 0.5) 5px,
+                    transparent 5px,
+                    transparent 9px);
+            z-index: 3;
+        }
+
+
+        .stickers {
+            position: relative;
+            height: 100px;
+        }
+
+        .sticker {
+            position: absolute;
+            padding: 10px 20px;
+            background: var(--light-coffee);
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+        }
+
+        .s-today {
+            left: 20px;
+            top: 10px;
+            transform: rotate(-10deg);
+            background: var(--light-coffee);
+        }
+
+        .s-quote {
+            right: 50%;
+            transform: translateX(50%);
+            top: 20px;
+            font-size: 0.9rem;
+            max-width: 250px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        /* Section 7: Message */
+        .message-section {
+            padding: 40px 30px;
+        }
+
+        .message-text {
+            font-size: 1.2rem;
+            color: #444;
+            font-weight: 300;
+        }
+
+        /* Section 8: RSVP */
+        .rsvp-section {
+            background-image: radial-gradient(circle at top, var(--light-coffee) 0%, transparent 80%);
+        }
+
+        .flamingo-wrapper {
+            margin: 20px auto;
+        }
+
+        .flamingo-img {
+            width: 80%;
+            max-width: 250px;
+            filter: drop-shadow(0 10px 20px rgba(141, 110, 99, 0.2));
+        }
+
+        .btn-rsvp {
+            background: rgba(141, 110, 99, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--text-brown);
+            padding: 20px 30px;
+            border-radius: 40px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 0 auto;
+            width: 85%;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(141, 110, 99, 0.2);
+            font-weight: 600;
+            transition: all 0.4s ease;
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%);
+        }
+
+        .btn-rsvp:hover {
+            background: rgba(141, 110, 99, 0.45);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(141, 110, 99, 0.3);
+        }
+
+        .btn-rsvp i {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px;
+            border-radius: 10px;
+        }
+
+        .handle {
+            margin-top: 30px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .play-btn {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 12px;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .map-wrapper {
+            position: relative;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            margin: 20px auto;
+            width: 92%;
+            box-shadow: 0 20px 40px rgba(141, 110, 99, 0.15);
+        }
+
+        .map-tape {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            width: 80px;
+            height: 25px;
+            background: rgba(141, 110, 99, 0.25);
+            backdrop-filter: blur(4px);
+            transform: rotate(-5deg);
+            z-index: 10;
+            border-left: 2px dashed rgba(255, 255, 255, 0.3);
+            border-right: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .map-tape-right {
+            left: auto;
+            right: 20px;
+            transform: rotate(5deg);
+        }
+
+        /* Custom filter for map to match coffee theme */
+        .leaflet-tile-pane {
+            filter: sepia(0.4) hue-rotate(-15deg) brightness(1.05) contrast(0.95) saturate(0.8);
+        }
+
+        .map-section {
+            padding-bottom: 80px;
+        }
+
+        /* ===== Welcome Screen ===== */
+        #welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #efebe9 0%, #d7ccc8 50%, #efebe9 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1s ease;
+        }
+
+        .welcome-content {
+            text-align: center;
+        }
+
+        .welcome-hint {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary-coffee);
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            opacity: 0.7;
+        }
+
+        /* ===== Envelope ===== */
+        .envelope-container {
+            width: 280px;
+            height: 180px;
+            position: relative;
+            cursor: pointer;
+            margin: 0 auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Back of envelope (visible behind flap) */
+        .env-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: #bcaaa4;
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        /* The card / letter inside - REMOVED */
+
+
+        /* Front of envelope */
+        .env-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(145deg, #efebe9, #d7ccc8);
+            border-radius: 8px;
+            z-index: 4;
+            border: 1px solid rgba(141, 110, 99, 0.15);
+        }
+
+        /* Decorative V-fold lines on front */
+        .env-front::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid rgba(141, 110, 99, 0.06);
+            border-top: 80px solid transparent;
+            border-bottom: 80px solid transparent;
+        }
+
+        .env-front::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-right: 140px solid rgba(141, 110, 99, 0.06);
+            border-top: 80px solid transparent;
+            border-bottom: 80px solid transparent;
+        }
+
+        /* Top flap */
+        .env-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 115px solid #c8b8ae;
+            z-index: 5;
+            transform-origin: top center;
+            transition: transform 0.6s ease-in-out;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Shadow line under flap */
+        .env-flap-shadow {
+            position: absolute;
+            top: 113px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            z-index: 4;
+            transition: opacity 0.3s;
+        }
+
+        /* Wax seal */
+        .env-seal {
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 35%, #a1887f 0%, #6d4c41 60%, #4e342e 100%);
+            top: 88px;
+            /* Perfectly centered on flap tip */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 3px rgba(255, 255, 255, 0.15);
+            transition: all 0.5s ease;
+        }
+
+        .env-seal span {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        @keyframes sealPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 0px rgba(141, 110, 99, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 10px rgba(141, 110, 99, 0);
+            }
+        }
+
+        .env-seal {
+            animation: sealPulse 2s infinite;
+        }
+
+        /* Tap text */
+        .welcome-tap {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary-coffee);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            margin-top: 35px;
+        }
+
+        /* === OPENED STATE === */
+        .envelope-container.opened .env-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-container.opened .env-flap-shadow {
+            opacity: 0;
+        }
+
+        .envelope-container.opened .env-seal {
+            opacity: 0;
+            transform: translateX(-50%) scale(0);
+            animation: none;
+        }
+    </style>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+        <div class="welcome-content">
+            <p class="welcome-hint">Tienes una invitación</p>
+
+            <div class="envelope-container" id="envelope">
+                <div class="env-back"></div>
+                <div class="env-front"></div>
+                <div class="env-flap"></div>
+                <div class="env-flap-shadow"></div>
+                <div class="env-seal"><span>★</span></div>
+            </div>
+
+            <p class="welcome-tap">Toca el sobre para abrir</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Floating Sticker Decorations -->
+        <img src="assets/img/s1.png" class="sticker-decor sd1" alt="">
+        <img src="assets/img/s2.png" class="sticker-decor sd2" alt="">
+        <img src="assets/img/s3.png" class="sticker-decor sd3" alt="">
+        <img src="assets/img/s4.png" class="sticker-decor sd4" alt="">
+        <img src="assets/img/s5.png" class="sticker-decor sd5" alt="">
+        <img src="assets/img/s6.png" class="sticker-decor sd6" alt="">
+        <img src="assets/img/s2.png" class="sticker-decor sd7" alt="">
+        <img src="assets/img/s1.png" class="sticker-decor sd8" alt="">
+        <img src="assets/img/s4.png" class="sticker-decor sd9" alt="">
+        <img src="assets/img/s3.png" class="sticker-decor sd10" alt="">
+        <img src="assets/img/s6.png" class="sticker-decor sd11" alt="">
+        <img src="assets/img/s5.png" class="sticker-decor sd12" alt="">
+        <img src="assets/img/s2.png" class="sticker-decor sd13" alt="">
+        <img src="assets/img/s6.png" class="sticker-decor sd14" alt="">
+        <img src="assets/img/s1.png" class="sticker-decor sd15" alt="">
+        <img src="assets/img/s4.png" class="sticker-decor sd16" alt="">
+
+        <!-- Section 1: Top Profile -->
+        <section class="section top-section">
+            <div class="polaroid-wrapper">
+                <div class="polaroid-tape"></div>
+                <div class="polaroid">
+                    <img src="assets/img/foto.png" alt="Profile">
+                    <div class="polaroid-text">My Birthday</div>
+                </div>
+                <div class="stars-decor">
+                    <i data-lucide="sparkles" class="star-icon s1"></i>
+                    <i data-lucide="sparkle" class="star-icon s2"></i>
+                    <i data-lucide="sparkle" class="star-icon s3"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zigzag Strip 1 -->
+        <div class="film-strip">
+            <div class="film-frame"><video src="assets/video/Video1.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto4.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video2.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto5.jpeg" alt="Moment"></div>
+        </div>
+
+        <!-- Section 2: Location -->
+        <section class="section location-section">
+            <h2 class="script-font">Lugar del evento</h2>
+            <div class="location-card">
+                <img src="assets/img/location.png" alt="Jardín Juan Pablo">
+                <div class="location-info">
+                    <p><strong>Jardín Juan Pablo</strong></p>
+                    <p>Calle Juan Pablo, Rancho La Providencia</p>
+                    <p>Jesús María, Cardenadas</p>
+                    <p>2:00 pm a 9:00 pm</p>
+                </div>
+            </div>
+            <button class="btn-location">Ver Ubicación</button>
+        </section>
+
+        <!-- Zigzag Strip 2 -->
+        <div class="film-strip r2">
+            <div class="film-frame"><img src="assets/img/foto6.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video3.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto7.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video1.mp4" muted autoplay loop playsinline></video></div>
+        </div>
+
+        <!-- Section 3: Music Player -->
+        <section class="section music-section">
+            <h2 class="display-font">Dale play a mi canción</h2>
+            <div class="spotify-player">
+                <div class="spotify-top">
+                    <img src="assets/img/Album.png" class="album-art" alt="Album Art">
+                    <div class="song-info">
+                        <div class="song-title">L'Amore Dice Ciao</div>
+                        <div class="artist-name">Armando Trovajoli</div>
+                    </div>
+                    <i data-lucide="heart" class="spotify-heart" fill="currentColor"></i>
+                </div>
+                <div class="spotify-controls">
+                    <i data-lucide="shuffle" class="s-icon"></i>
+                    <i data-lucide="skip-back" class="s-icon"></i>
+                    <div class="s-play-btn">
+                        <i data-lucide="play" fill="currentColor"></i>
+                    </div>
+                    <i data-lucide="skip-forward" class="s-icon"></i>
+                    <i data-lucide="repeat" class="s-icon"></i>
+                </div>
+                <div class="spotify-progress">
+                    <span class="time" id="current-time">0:00</span>
+                    <div class="s-progress-bar" id="progress-container">
+                        <div class="s-progress" id="progress-bar"></div>
+                    </div>
+                    <span class="time" id="duration-time">3:12</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zigzag Strip 3 -->
+        <div class="film-strip r3">
+            <div class="film-frame"><video src="assets/video/Video2.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto4.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video3.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto5.jpeg" alt="Moment"></div>
+        </div>
+
+        <!-- Section 4: Calendar -->
+        <section class="section calendar-section">
+            <div class="calendar">
+                <h2 class="script-font calendar-title">Mayo</h2>
+                <span class="calendar-subtitle">Reserva la fecha</span>
+                <div class="days-header">
+                    <span>LU</span><span>MA</span><span>MI</span><span>JU</span><span>VI</span><span>SA</span><span>DO</span>
+                </div>
+                <div class="days-grid">
+                    <!-- May 1st, 2026 is Friday. In a Mon-Sun grid, Friday is position 5. -->
+                    <span></span><span></span><span></span><span></span><span>1</span><span>2</span><span>3</span>
+                    <span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                    <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+                    <span>18</span><span>19</span><span>20</span><span>21</span><span
+                        class="highlight">22</span><span>23</span><span>24</span>
+                    <span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zigzag Strip 4 -->
+        <div class="film-strip r4">
+            <div class="film-frame"><img src="assets/img/foto6.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video1.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto7.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video2.mp4" muted autoplay loop playsinline></video></div>
+        </div>
+
+        <!-- Section 5: Countdown -->
+        <section class="section countdown-section">
+            <div class="countdown-circle">
+                <div id="countdown" class="countdown-timer">217:00:37:27</div>
+                <div class="countdown-labels">
+                    <span>DÍAS</span>
+                    <span>HORAS</span>
+                    <span>MINUTOS</span>
+                    <span>SEGUNDOS</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zigzag Strip 5 -->
+        <div class="film-strip r5">
+            <div class="film-frame"><video src="assets/video/Video3.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto4.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video1.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto5.jpeg" alt="Moment"></div>
+        </div>
+
+        <!-- Section 7: Message -->
+        <section class="section message-section">
+            <p class="message-text">
+                ¡Me haría muy feliz que vinieras a mi fiesta!<br>
+                Tu presencia haría que mi cumpleaños sea aún más especial.<br>
+                Espero poder compartir risas, momentos lindos y celebrar juntos este día.
+            </p>
+        </section>
+
+        <!-- Zigzag Strip 6 -->
+        <div class="film-strip r6">
+            <div class="film-frame"><img src="assets/img/foto6.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video2.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto7.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video3.mp4" muted autoplay loop playsinline></video></div>
+        </div>
+
+        <!-- Section 8: Interactive Map -->
+        <section class="section map-section">
+            <h2 class="script-font">Ubicación del evento</h2>
+            <div class="map-wrapper">
+                <div class="map-tape"></div>
+                <div class="map-tape map-tape-right"></div>
+                <div id="map"></div>
+            </div>
+        </section>
+
+        <!-- Zigzag Strip 7 -->
+        <div class="film-strip r7">
+            <div class="film-frame"><video src="assets/video/Video1.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto4.jpeg" alt="Moment"></div>
+            <div class="film-frame"><video src="assets/video/Video2.mp4" muted autoplay loop playsinline></video></div>
+            <div class="film-frame"><img src="assets/img/foto5.jpeg" alt="Moment"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 0. Map Initialization (moved up for observer access)
+            const mapCoords = [21.926990, -102.356045];
+            const map = L.map('map', {
+                scrollWheelZoom: false
+            }).setView(mapCoords, 16);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap'
+            }).addTo(map);
+
+            const customIcon = L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div style="background-color: var(--primary-coffee); width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 2px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">
+                <div style="width: 10px; height: 10px; background-color: white; border-radius: 50%;"></div>
+               </div>`,
+                iconSize: [30, 30],
+                iconAnchor: [15, 30]
+            });
+
+            L.marker(mapCoords, { icon: customIcon }).addTo(map)
+                .bindPopup('<b style="font-family: \'Outfit\', sans-serif;">Jardín Juan Pablo</b><br><span style="font-family: \'Outfit\', sans-serif;">¡Te esperamos!</span>')
+                .openPopup();
+
+            // Map click to open Google Maps
+            document.getElementById('map').addEventListener('click', () => {
+                window.open(`https://www.google.com/maps/search/?api=1&query=Jardín+Juan+Pablo`, '_blank');
+            });
+
+            // 1. Countdown Logic
+            const targetDate = new Date('May 22, 2026 14:00:00').getTime();
+            const countdownElement = document.getElementById('countdown');
+
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    countdownElement.innerHTML = "00:00:00:00";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `
+            <span>${String(days).padStart(2, '0')}</span><span class="sep">:</span>
+            <span>${String(hours).padStart(2, '0')}</span><span class="sep">:</span>
+            <span>${String(minutes).padStart(2, '0')}</span><span class="sep">:</span>
+            <span>${String(seconds).padStart(2, '0')}</span>
+        `;
+            };
+
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // 2. Scroll Reveal Animation
+            const animatedElements = document.querySelectorAll('.section, .film-strip');
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Invalidate map size once it becomes visible to ensure it renders correctly
+                        if (entry.target.classList.contains('map-section') && typeof map !== 'undefined') {
+                            setTimeout(() => map.invalidateSize(), 500);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            animatedElements.forEach(el => {
+                sectionObserver.observe(el);
+            });
+
+            // 3. Music Player UI Toggles
+            const playBtn = document.querySelector('.s-play-btn');
+            const playIcon = playBtn.querySelector('i');
+            const bgMusic = document.getElementById('bg-music');
+            let isPlaying = false;
+
+            playBtn.addEventListener('click', () => {
+                isPlaying = !isPlaying;
+                if (isPlaying) {
+                    bgMusic.play().catch(e => console.log("Audio playback failed:", e));
+                    playBtn.innerHTML = '<i data-lucide="pause" fill="currentColor"></i>';
+                    playBtn.style.animation = 'pulse 1s infinite ease-in-out';
+                } else {
+                    bgMusic.pause();
+                    playBtn.innerHTML = '<i data-lucide="play" fill="currentColor"></i>';
+                    playBtn.style.animation = 'pulse 2s infinite ease-in-out';
+                }
+                lucide.createIcons();
+            });
+
+            const progressBar = document.getElementById('progress-bar');
+            const progressContainer = document.getElementById('progress-container');
+            const currentTimeEl = document.getElementById('current-time');
+            const durationTimeEl = document.getElementById('duration-time');
+
+            const formatTime = (time) => {
+                const min = Math.floor(time / 60);
+                const sec = Math.floor(time % 60);
+                return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+            };
+
+            bgMusic.addEventListener('timeupdate', () => {
+                if (bgMusic.duration) {
+                    const percent = (bgMusic.currentTime / bgMusic.duration) * 100;
+                    progressBar.style.width = `${percent}%`;
+                    currentTimeEl.textContent = formatTime(bgMusic.currentTime);
+                }
+            });
+
+            bgMusic.addEventListener('loadedmetadata', () => {
+                durationTimeEl.textContent = formatTime(bgMusic.duration);
+            });
+
+            progressContainer.addEventListener('click', (e) => {
+                const width = progressContainer.clientWidth;
+                const clickX = e.offsetX;
+                const duration = bgMusic.duration || 192; // Fallback a 3:12
+                bgMusic.currentTime = (clickX / width) * duration;
+                if (!isPlaying) {
+                    playBtn.click(); // Autoplay al buscar si estaba pausado
+                }
+            });
+
+            const heartIcon = document.querySelector('.spotify-heart');
+            heartIcon.addEventListener('click', () => {
+                heartIcon.classList.toggle('active');
+                if (heartIcon.classList.contains('active')) {
+                    heartIcon.style.color = '#1DB954';
+                } else {
+                    heartIcon.style.color = '#b3b3b3';
+                }
+            });
+
+            // 5. Button Interactions
+            document.querySelector('.btn-location').addEventListener('click', () => {
+                window.open(`https://www.google.com/maps/search/?api=1&query=Jardín+Juan+Pablo`, '_blank');
+            });
+
+            // Envelope Logic
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const envelope = document.getElementById('envelope');
+
+            envelope.addEventListener('click', () => {
+                if (envelope.classList.contains('opened')) return;
+
+                // Open the envelope
+                envelope.classList.add('opened');
+
+                // After envelope animation, fade out screen
+                setTimeout(() => {
+                    welcomeScreen.style.opacity = '0';
+                    welcomeScreen.style.pointerEvents = 'none';
+                }, 800);
+
+                // Remove from DOM
+                setTimeout(() => {
+                    welcomeScreen.style.display = 'none';
+                }, 1800);
+
+                // Start music and videos
+                setTimeout(() => {
+                    if (!isPlaying) {
+                        playBtn.click();
+                    }
+                    // Explicitly play all videos to ensure they start on interaction
+                    document.querySelectorAll('video').forEach(v => {
+                        v.play().catch(e => console.log("Video play failed:", e));
+                    });
+                }, 400);
+            });
+        });
+        lucide.createIcons();
+    </script>
+
+    <audio id="bg-music" src="assets/video/musica.mp3" loop></audio>
+</body>
+
+</html>
